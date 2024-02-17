@@ -1,0 +1,25 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the data
+df = pd.read_csv('Seasons_Stats[1].csv')
+
+# Filter data for centers (C) for the years 1990 to 2010
+year_data = df[(df['Year'] >= 1990) & (df['Year'] <= 2010) & (df['Pos'] == 'C')]
+
+# Calculate average points by year for centers
+avg_points_by_year = year_data.groupby('Year')['PTS'].mean().reset_index()
+
+# Create line plot to show the progression of average points
+plt.figure(figsize=(10, 6))
+plt.plot(avg_points_by_year['Year'], avg_points_by_year['PTS'], marker='o', color='skyblue', linestyle='-')
+
+# Add labels and title
+plt.xlabel('Year')
+plt.ylabel('Average Points')
+plt.title('Average Points by Centers in the NBA (1990-2010)')
+
+# Show plot
+plt.grid(True)
+plt.tight_layout()
+plt.show()
